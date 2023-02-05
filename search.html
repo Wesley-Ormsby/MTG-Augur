@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="main.css">
+    <title>MTG Augur - Card Search</title>
+
+
+    <meta name="title" content="MTG Augur">
+
+    <meta name='keywords' content='MTG, Scryfall, clipboard'>
+    <meta name='description' content='A Scrfall Powered Clipboard'>
+    <meta name='author' content='Wesley Ormsby'>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <meta name='og:image' content='favicon.png'>
+
+    <meta name='og:title' content='MTG Augur'>
+    <!-- edit this -->
+    <meta name='og:url' content='https://edh-deck-check.vercel.app'>
+    <meta name='og:site_name' content='MTG Augur'>
+    <meta name='og:description' content='A Scrfall Powered Clipboard'>
+
+
+    <meta property="twitter:card" content="summary_large_image">
+    <!-- edit this -->
+    <meta property="twitter:url" content="https://edh-deck-check.vercel.app/">
+    <meta property="twitter:title" content="MTG Augur">
+    <meta property="twitter:description" content='A Scrfall Powered Clipboard'>
+    <meta property="twitter:image" content="icon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+  </head>
+  <body onload="loadCards()" class="light">
+    <nav>
+      <button onclick="location.href='index.html'"><svg class="homeBtn" fill="#333333" height="64px" width="64px" version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-63 65 128 128" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M1.1,81.1c-20.3,0-36.7,16.5-36.7,36.7c0,12.5,6.2,23.5,15.8,30.1c1.2,0.8,2.4,1.6,3.7,2.3c5.2,2.7,11,4.2,17.1,4.2 c5.8,0,11.3-1.4,16.3-3.8c1.3-0.6,2.5-1.4,3.8-2.2c10-6.5,16.7-17.8,16.7-30.7C37.7,97.5,21.2,81.1,1.1,81.1z M19.7,144.2 c-1.2,0.8-2.4,1.6-3.7,2.3c-4.5,2.3-9.6,3.7-15,3.7c-5.8,0-11.2-1.5-15.9-4.2c-1.3-0.7-2.5-1.6-3.7-2.4 c-7.8-5.9-12.9-15.3-12.9-25.9c0-17.9,14.6-32.5,32.5-32.5s32.5,14.6,32.5,32.5C33.4,128.7,28.1,138.4,19.7,144.2z M-42.3,128.2 c-1.5-2.3-4.5-3.1-6.9-1.6c-2.3,1.5-3.1,4.5-1.6,6.9l11.3,17.8c0.5,0.7,0.3,1.7-0.5,2.2c-0.8,0.5-1.8,0.3-2.3-0.5l-11.2-17.7 c-1.3-1.9-1.6-4.1-1.1-6.2c0.5-2.1,1.9-4,3.7-5.2c0.8-0.6,1.9-0.9,2.8-1.2l4.6-20.5c0.6-2.7-1.1-5.4-3.7-6c-2.7-0.6-5.4,1.2-6,3.8 l-7.6,33.3c-0.9,3.9-0.4,8.5,1.9,12.3l9.7,15.4c1.3,1.9,1.6,4.2,1.1,6.2l-15,17.2h22.8l13.9-22.5c2-4,0.3-8.1-2-11.8L-42.3,128.2z M50,167.4c-0.4-2.1-0.1-4.3,1.1-6.2l9.7-15.4c2.3-3.8,2.8-8.4,1.9-12.3l-7.6-33.3c-0.6-2.6-3.3-4.4-6-3.8c-2.6,0.6-4.3,3.3-3.7,6 l4.6,20.5c1.1,0.2,2,0.6,2.8,1.2c1.8,1.2,3.3,3.1,3.7,5.2c0.5,2.1,0.1,4.4-1.1,6.2L44.3,153c-0.5,0.8-1.5,1.1-2.3,0.5 c-0.8-0.5-1.1-1.5-0.5-2.2l11.2-17.8c1.5-2.3,0.7-5.4-1.6-6.9c-2.3-1.5-5.4-0.7-6.9,1.6l-13.9,22.2c-2.3,3.7-4,7.8-2,11.8l13.9,22.5 H65L50,167.4z M1.1,157.6c-6.3,0-12.7-1.5-18.4-4.4l-5.9,16.1h47.7l-6-15.7C13,156.2,7.2,157.6,1.1,157.6z M-23,103.7l2.7,1.6 c3.2-5.4,8.1-9.4,14-11.3l-0.9-3.1C-13.8,93.1-19.4,97.6-23,103.7z M-27,118.3h3.2c0-2.4,0.3-4.9,1.1-7.2l-3.1-0.8 C-26.6,112.8-27,115.6-27,118.3z"></path> </g></svg></button>
+      <label>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span id="globalTermsCount">4</span>
+        <input id="queryInput" onkeydown="querySearch(event)" type="text" placeholder="Enter Your Terms..." autocapitalize="false" autocomplete="on" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="1024">
+      </label>
+      <button id="addAllCards" onclick="displayModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+    </button>
+    <button id="menuButton" onclick="openNav()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+    </button>
+  </nav>
+    <div id="warnings"></div>
+    <p id="details"></p>
+
+
+    <div id="allCards">
+      <div class="pageControls">
+        <button class="Previous" onclick="previous()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          Previous
+        </button>
+        <p id="page">...</p>
+        <button class="Next" onclick="next()">
+          Next
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+
+      <div id="cards"></div>
+      
+      <div class="pageControls">
+        <button class="Previous" onclick="previous()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          Previous
+        </button>
+        <button class="Next" onclick="next()">
+          Next
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="noResults">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"></polyline><line x1="13" y1="19" x2="19" y2="13"></line><line x1="16" y1="16" x2="20" y2="20"></line><line x1="19" y1="21" x2="21" y2="19"></line><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"></polyline><line x1="5" y1="14" x2="9" y2="18"></line><line x1="7" y1="17" x2="4" y2="20"></line><line x1="3" y1="19" x2="5" y2="21"></line></svg>
+      <h3>No Cards Found</h3>
+      <p>No cards have matched your terms. <br>Remember, <a onclick="openNav()">Global Terms</a> may be messing up your results!</p>
+      <div class="centerContent">
+      <a class="buttonLink" href="index.html">Home</a>
+    <a class="buttonLink" href="https://scryfall.com/docs/syntax">Scryfall Syntax Guide</a>
+  </div>
+</div>
+
+
+    <div id="mySidenav" class="sidenav">
+      <div class="sideContainer">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <h2>Clipboard</h2>
+        <div id="clipboard"></div>
+        <div class="clipboardOptions">
+          <div>
+            <button onclick="copyClipboard()">Copy</button>
+              <button onclick="clearClipboard()">Clear</button>
+          </div>
+      <div class="clipboardStats">
+        <div>Price: <span id="totalPrice"></span></div>
+        <div>Cards: <span id="totalCards"></span></div>
+    </div>
+      </div>
+
+        <h2>Global Search Terms</h2>
+        <div class="globalSearchTermsContainer">
+        <div id="globalSearchTerms"></div>
+        <button onclick="addNewTerm()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+         </div>
+        <p class="smallFont">When a Term is updated or removed, the search will be reloaded.</p>
+
+        <h2>Settings</h2>
+        <h4>Sort</h4>
+        <select onchange="changeSort(this)" id="sort">
+          <option selected="selected" value="name">Name</option>
+          <option value="released">Release Date</option>
+          <option value="set">Set/Number</option>
+          <option value="rarity">Rarity</option>
+          <option value="color">color</option>
+          <option value="usd">Price: USD</option>
+          <option value="tix">Price: TIX</option>
+          <option value="eur">Price: EUR</option>
+          <option value="cmc">Mana Value</option>
+          <option value="power">Power</option>
+          <option value="toughness">Toughness</option>
+          <option value="artist">Artist Name</option>
+          <option value="edhrec">EDHREC Rank</option>
+          <option value="review">Set Review</option>
+        </select>
+        <select onchange="changeOrder(this)" id="order">
+          <option selected="selected" value="">Auto</option>
+          <option value="asc">Asc</option>
+          <option value="desc">Desc</option>
+        </select>
+        <h4>Price</h4>
+        <select onchange="changePrice(this)" id="price">
+          <option selected="selected" value="usd">USD</option>
+          <option value="usd_foil">USD Foil</option>
+          <option value="usd_etched">USD Etched</option>
+          <option value="eur">EUR</option>
+          <option value="eur_foil">EUR Foil</option>
+          <option value="tix">TIX</option>
+        </select>
+        <p class="smallFont">Reload the tab to see the new price.</p>
+        <h4>Appearance</h4>
+        <select id="appearance" onclick="changeAppearance(this)">
+          <option selected="selected" value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+  </div>
+
+
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-content-non-loader">
+    <p>Are You Sure You Want To Add <span id="modalNumberOfCards"></span> Item(s) to Your Clipboard?</p>
+    <button id="cancel" onclick="closeModal()">Cancel</button><button id="yes" onclick="addAllCardsToClipboard()">Yes</button>
+       </div>
+       <div id="addAllCardsLoader"></div>
+  </div>
+
+</div>
+
+
+    <script src="main.js"></script>
+
+    <footer>
+      <div>
+    <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></a>
+    <a href="https://scryfall.com/docs/syntax" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17v2a2 2 0 0 1-2 2v0a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v3h3"></path><path d="M22 17v2a2 2 0 0 1-2 2H8"></path><path d="M19 17V5a2 2 0 0 0-2-2H4"></path><path d="M22 17H10"></path></svg></a>
+    <a href="https://github.com/Wesley-Ormsby/MTG-Augur" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a>
+    </div>
+    <p>
+      MTG Augur is unofficial Fan Content permitted under the <a href="https://company.wizards.com/en/legal/fancontentpolicy" target="_blank">Fan Content Policy</a>. MTG Augur uses images, card data, and querying capabilities from Scryfall and is not approved nor endorsed by Wizards or <a href="https://scryfall.com/" target="_blank">Scrfall</a>.
+      </p>
+      <p>Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.
+    </p>
+    <p>
+      All other content © Wesley Ormsby 2023.
+    </p>
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="main.css" />
+    <title>MTG Augur</title>
+    <meta charset="UTF-8" />
+
+    <meta name="title" content="MTG Augur">
+
+    <meta name='keywords' content='MTG, Scryfall, clipboard'>
+    <meta name='description' content='A Scrfall Powered Clipboard'>
+    <meta name='author' content='Wesley Ormsby'>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <meta name='og:image' content='favicon.png'>
+
+    <meta name='og:title' content='MTG Augur'>
+    <!-- edit this -->
+    <meta name='og:url' content='https://edh-deck-check.vercel.app'>
+    <meta name='og:site_name' content='MTG Augur'>
+    <meta name='og:description' content='A Scrfall Powered Clipboard'>
+
+
+    <meta property="twitter:card" content="summary_large_image">
+    <!-- edit this -->
+    <meta property="twitter:url" content="https://edh-deck-check.vercel.app/">
+    <meta property="twitter:title" content="MTG Augur">
+    <meta property="twitter:description" content='A Scrfall Powered Clipboard'>
+    <meta property="twitter:image" content="icon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body onload="loadCards()" class="light">
+    <div class="head">
+      <div>
+        <h1>MTG Augur</h1>
+        <p class="subHeading">
+          A <a href="https://scryfall.com/" target="_blank">Scrfall</a> Powered
+          Clipboard
+        </p>
+        <input
+          id="queryInput"
+          onkeydown="querySearch(event)"
+          type="text"
+          placeholder="Enter your Search Query..."
+          autocapitalize="false"
+          autocomplete="on"
+          autocapitalize="none"
+          autocorrect="off"
+          spellcheck="false"
+          maxlength="1024"
+        />
+      </div>
+    </div>
+<div class="body">
+<h2>Why Not Use Scryfall?</h2>
+<p>Are you tired of split-screening a Scryfall window and your trusted deck editor, typing in cards one name at a time <i>over and over and over again</i>? With MTG Augur,  you can easily explore card options and save all the cards you need with a click of a button! Then, when you're ready, effortlessly copy the list to your clipboard and reflect on the hours of tedious typing saved! 
+  </p>
+  <p>MTG Augur is made for only one purpose: a card clipboard for Magic card searches. Tailored for deck-building research, MTG Augur does not have the numerous features that Scryfall has.</p>
+
+  <h2>How Does It Work?</h2>
+
+  <p><span>1</span> Make your search using Scryfall's syntax</p>
+  <input value="id:dimir type:zombie  usd<4" disabled="true">
+  <p><span>2</span> When you find a card you like, click it</p>
+  <div id="cards"></div>
+  <p><span>3</span> View and copy your clipboard</p>
+  <div id="clipboard"></div>
+  <div class="clipboardOptions">
+    <div>
+      <button onclick="copyClipboard()">Copy</button>
+        <button onclick="clearClipboard()">Clear</button>
+    </div>
+<div class="clipboardStats">
+  <div>Price: <span id="totalPrice"></span></div>
+  <div>Cards: <span id="totalCards"></span></div>
+</div>
+</div>
+<button class="mainHomeButton" onclick="focusOnInput()">Make your first search</button></div>
+    <footer>
+      <div>
+        <a href="index.html"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline></svg
+        ></a>
+        <a href="https://scryfall.com/docs/syntax" target="_blank"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M10 17v2a2 2 0 0 1-2 2v0a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v3h3"
+            ></path>
+            <path d="M22 17v2a2 2 0 0 1-2 2H8"></path>
+            <path d="M19 17V5a2 2 0 0 0-2-2H4"></path>
+            <path d="M22 17H10"></path></svg
+        ></a>
+        <a href="https://github.com/Wesley-Ormsby/MTG-Augur" target="_blank"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+            ></path>
+            <path d="M9 18c-4.51 2-5-2-7-2"></path></svg
+        ></a>
+      </div>
+      <p>
+        MTG Augur is unofficial Fan Content permitted under the
+        <a
+          href="https://company.wizards.com/en/legal/fancontentpolicy"
+          target="_blank"
+          >Fan Content Policy</a
+        >. MTG Augur uses images, card data, and querying capabilities from
+        Scryfall and is not approved nor endorsed by Wizards or
+        <a href="https://scryfall.com/" target="_blank">Scrfall</a>.
+      </p>
+      <p>
+        Portions of the materials used are property of Wizards of the Coast.
+        ©Wizards of the Coast LLC.
+      </p>
+      <p>All other content © Wesley Ormsby 2023.</p>
+    </footer>
+    <script src="home.js"></script>
+  </body>
+</html>

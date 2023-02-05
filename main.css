@@ -1,0 +1,697 @@
+/*
+- page does not exist
+- mobile ready
+- edit meta url for website link
+
+- commenting code
+- github
+*/
+.light,
+.system {
+  --bg1: white;
+  --bg2: rgb(248, 248, 248);
+  --bg3: rgb(223, 223, 223);
+  --errror: rgb(255, 170, 170);
+  --color1: rgb(36, 36, 36);
+  --color2: rgb(77, 77, 77);
+  --highlight: rgb(76, 168, 223);
+
+  --footer: var(--color2);
+  --errorForground: var(--color2);
+}
+.dark {
+  --bg1: rgb(40, 40, 40);
+  --bg2: rgb(48, 48, 48);
+  --bg3: rgb(17, 17, 17);
+  --errror: rgb(255, 170, 170);
+  --color1: rgb(219, 219, 219);
+  --color2: rgb(178, 178, 178);
+  --highlight: rgb(0, 151, 239);
+
+  --footer: rgb(85, 85, 85);
+  --errorForground: var(--bg1);
+}
+@media (prefers-color-scheme: dark) {
+  .system {
+    --bg1: rgb(40, 40, 40);
+  --bg2: rgb(48, 48, 48);
+  --bg3: rgb(17, 17, 17);
+  --errror: rgb(255, 170, 170);
+  --color1: rgb(219, 219, 219);
+  --color2: rgb(178, 178, 178);
+  --highlight: rgb(0, 151, 239);
+
+  --footer: rgb(85, 85, 85);
+  }
+}
+* {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  color: var(--color1);
+}
+body {
+  color: var(--color1);
+  background-color: var(--bg1);
+  padding: 0px;
+  margin: 0px;
+  font-weight: 300;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+button {
+  cursor: pointer;
+}
+a {
+  color: var(--highlight);
+  text-decoration: underline;
+  cursor: pointer;
+}
+a:hover {
+  filter: brightness(120%);
+}
+
+/***************** NAV BAR *****************/
+nav {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg2);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  height: 40px;
+  border-bottom: 1px solid var(--color1);
+}
+nav input {
+  display: block;
+  width: 100%;
+  height: 25px;
+  font-size: 20px;
+  color: var(--color1);
+}
+::placeholder {
+  color: var(--color2);
+}
+nav * {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+nav input {
+  border: none;
+  background-color: var(--bg2);
+}
+nav input:focus,
+nav input:hover {
+  outline: none !important;
+  color: var(--color2);
+}
+nav label {
+  display: flex;
+  align-items: center;
+  margin-right: -5px;
+  width: 100%;
+}
+nav label:focus-within svg,
+label:hover svg {
+  stroke: var(--color2);
+}
+#globalTermsCount {
+  color: var(--globalTermsCounter);
+  position: relative;
+  bottom: 8px;
+  right: 7px;
+  margin: 0px;
+  height: 14px;
+  min-width: 14px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  font-size: 10px;
+  border-radius: 50%;
+  background-color: var(--highlight);
+}
+nav button {
+  background-color: var(--bg2);
+  padding: 5px;
+  transition: 0.5s;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border: none;
+  margin: 0px;
+}
+nav button .homeBtn {
+  height: 30px;
+  width: 30px;
+  stroke: var(--color1);
+  fill: var(--color1);
+}
+nav button:hover:not([disabled]) {
+  background-color: var(--bg3);
+}
+
+/***************** SEARCH PAGE *****************/
+#warnings {
+  display: flex;
+  flex-direction: column;
+  margin-top: -20px;
+  padding: 0px;
+}
+#warnings p {
+  display: block;
+  text-align: center;
+  padding-bottom: 5px;
+  color: var(--color2);
+  border-bottom: 1px solid var(--bg2);
+  width: 100%;
+  margin: 5px 0;
+  font-size: 12px;
+}
+#details {
+  display: none;
+  text-align: center;
+  padding-bottom: 5px;
+  color: var(--errorForground);
+  background-color: var(--errror);
+  border-bottom: 1px solid var(--bg2);
+  width: 100%;
+  margin: 0px;
+  margin-top: -5px;
+  padding: 3px;
+  font-size: 12px;
+}
+
+.pageControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0% 10%;
+  margin-bottom: 20px;
+}
+.pageControls button {
+  display: flex;
+  align-items: center;
+}
+.pageControls svg {
+  stroke-width: 1.5px;
+  stroke: var(--highlight);
+}
+button:not(nav button) {
+  background-color: transparent;
+  font-weight: 300;
+  border: 1px solid var(--highlight);
+  color: var(--highlight);
+  padding: 10px;
+  border-radius: 5px;
+  height: 30px;
+  font-size: 15px;
+}
+button:not(nav button, [disabled]):hover {
+  background-color: var(--highlight);
+  color: var(--bg1);
+}
+button:not(nav button, [disabled]):hover svg {
+  stroke: var(--bg1);
+}
+button:disabled:not(nav button) {
+  border: 1px solid var(--bg3);
+  color: var(--bg3);
+  cursor: not-allowed;
+}
+button:disabled svg {
+  stroke: var(--bg3);
+}
+
+img[data-clipboard="true"] {
+  border: 3px solid var(--highlight);
+  border-radius: 5%;
+}
+#cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 0% 2%;
+  min-height: 100vh;
+}
+.mockCard {
+  width: 200px;
+  background-color: var(--bg3);
+  height: 279.19px;
+  border-radius: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mockCard svg {
+  fill: var(--color1);
+}
+#cards .card img {
+  display: none;
+  width: 200px;
+}
+.card {
+  margin: 5px;
+  width: 200px;
+}
+.cardFooter {
+  display: flex;
+}
+.card a {
+  display: inline-block;
+  padding: 5px;
+  width: auto;
+  background-color: var(--bg3);
+  border-radius: 5px;
+  text-align: center;
+  margin: 5px;
+  transition: 0.5s;
+}
+.card a:hover {
+  background-color: var(--bg2);
+}
+#cards .card .scryfallIMG {
+  display: block;
+  width: 20px;
+}
+#cards .card a:hover .scryfallIMG {
+  filter: brightness(150%);
+}
+.card span {
+  display: flex;
+  padding: 5px;
+  min-width: 40px;
+  background-color: var(--bg3);
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+
+  margin: 5px;
+}
+#cards .card button {
+  margin: 5px;
+  padding: 0 10px;
+}
+
+#noResults {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
+  text-align: center;
+}
+#noResults svg {
+  stroke: var(--bg3);
+  width: 40vw;
+  height: 40vw;
+  stroke-width: 1px;
+}
+#noResults p {
+  font-size: 14px;
+  max-width: 300px;
+}
+h3 {
+  font-size: 30px;
+  margin-bottom: 0px;
+}
+.buttonLink {
+  background-color: transparent;
+  display: inline;
+  text-decoration: none;
+  font-weight: 300;
+  border: 1px solid var(--highlight);
+  color: var(--highlight);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  margin: 0px 5px;
+}
+.buttonLink:hover {
+  background-color: var(--highlight);
+  color: var(--bg1);
+}
+.centerContent {
+  display: flex;
+}
+
+/***************** Modal *****************/
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal-content {
+  background-color: var(--bg1);
+  margin: auto;
+  padding: 0px;
+  width: 70%;
+  max-width: 400px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.modal-content-non-loader {
+  padding: 15px;
+}
+.modal-content button {
+  height: auto;
+  margin: 0px 5px;
+}
+#cancel:not([disabled]) {
+  color: var(--errror);
+  border-color: var(--errror);
+}
+.modal-content #cancel:hover:not([disabled]) {
+  background-color: var(--errror);
+  color: var(--bg1);
+}
+#yes:not([disabled]) {
+  background-color: var(--highlight);
+  color: var(--bg1);
+}
+.modal-content #yes:hover:not([disabled]) {
+  background-color: transparent;
+  color: var(--highlight);
+}
+#addAllCardsLoader {
+  display: none;
+  background-color: var(--highlight);
+  height: 10px;
+  transition: 0.5s;
+}
+#globalSearchTerms input {
+  width: 60%;
+  display: inline-block;
+  height: 20px;
+  font-size: 15px;
+}
+
+/***************** SIDE NAV *****************/
+.sidenav .sideContainer {
+  width: 90vw;
+  padding: 5vw;
+  max-height: 100%;
+  padding-bottom: 100px;
+  overflow-y: scroll;
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--bg3);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align: center;
+}
+
+.closebtn {
+  padding: 30px;
+  text-decoration: none;
+  font-size: 40px;
+  color: var(--color1);
+  display: block;
+  transition: 0.5s;
+}
+
+.closebtn:hover {
+  color: var(--color2);
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#clipboard {
+  color: var(--color1);
+  background-color: var(--bg1);
+  border-radius: 10px;
+  padding: 20px 30px;
+  transition: 0.5s;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+.clipboardOptions {
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.clipboardOptions button {
+  height: auto;
+  color: var(--color1);
+  background-color: var(--bg1);
+  border-color: var(--color1);
+  margin: 0px 5px;
+}
+.clipboardOptions button:hover {
+  background-color: transparent;
+  color: var(--color1);
+  border-color: var(--color1);
+}
+.clipboardStats {
+  display: flex;
+}
+.clipboardOptions .clipboardStats div {
+  margin: 0px 5px;
+  background-color: var(--bg1);
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 300;
+  border: 1px solid black;
+}
+
+#clipboard div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  display: flex;
+}
+.clipboardPrice {
+  margin-right: 10px;
+}
+#clipboard .clipboardRemoveBtn {
+  float: right;
+  transition: 0.3s;
+  color: var(--errror);
+}
+#clipboard .clipboardRemoveBtn:hover {
+  filter: brightness(40%);
+  cursor: pointer;
+}
+
+#globalSearchTerms {
+  display: flex;
+  flex-direction: column;
+}
+.globalSearchTermsContainer {
+  background-color: var(--bg1);
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 0px auto;
+  overflow: auto;
+}
+.globalSearchTermsContainer button {
+  height: auto;
+  padding: 2px 0px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  border-radius: 0px;
+  border-color: transparent;
+}
+#globalSearchTerms div {
+  display: flex;
+  border-bottom: 2px solid var(--bg2);
+  border-top: 2px solid var(--bg2);
+  align-items: center;
+}
+#globalSearchTerms div input {
+  width: 100%;
+  border: none;
+  outline: none !important;
+  padding: 0px 30px;
+  height: 30px;
+  color: var(--color2);
+}
+#globalSearchTerms div ::placeholder {
+  color: var(--bg3);
+}
+#globalSearchTerms span {
+  float: right;
+  transition: 0.3s;
+  color: var(--errror);
+  margin-right: 12px;
+}
+#globalSearchTerms span:hover {
+  filter: brightness(40%);
+  cursor: pointer;
+}
+.smallFont {
+  font-size: 10px;
+  color: var(--color2);
+}
+select {
+  padding: 10px;
+  background-color: var(--bg1);
+  border: 1px solid var(--color1);
+  border-radius: 5px;
+  font-size: 15px;
+}
+select:hover {
+  background-color: var(--bg3);
+}
+
+/***************** FOOTER *****************/
+footer {
+  background-color: var(--footer);
+  color: var(--bg1);
+  padding: 20px;
+  margin: 0px;
+  margin-top: 20px;
+}
+
+footer div {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+footer div a {
+  padding: 10px;
+  border-radius: 50%;
+  background-color: var(--bg3);
+  margin: 0px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+footer div a:hover {
+  background-color: var(--bg1);
+}
+footer div a svg {
+  stroke: var(--color1);
+}
+footer div a:hover svg {
+  stroke: var(--color2);
+}
+
+footer p {
+  color: rgb(223, 223, 223);
+  font-size: 12px;
+  max-width: 400px;
+  display: block;
+  margin: 30px auto 0px auto;
+}
+footer p a {
+  color: white;
+}
+
+/***************** HOME PAGE *****************/
+h1 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 300;
+  color: var(--bg2);
+  margin-bottom: 5px;
+}
+.subHeading {
+  text-align: center;
+  margin-top: 0px;
+  font-size: 20px;
+}
+.subHeading a {
+  text-decoration: none;
+}
+.subHeading a:hover {
+  text-decoration: underline;
+}
+.head {
+  background-color: var(--highlight);
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.head div {
+  width: 100%;
+}
+.head a {
+  color: var(--bg2);
+}
+.head input {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  padding: 5px;
+  height: auto;
+  font-size: 30px;
+  border-radius: 5px;
+  border: 1px solid var(--color1);
+  background-color: var(--bg1);
+}
+.head input:focus {
+  outline: none !important;
+  background-color: var(--bg2);
+}
+.body {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+.body h2 {
+  text-align: center;
+}
+.body p span {
+  padding: 5px;
+  background-color: var(--highlight);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+.body input {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+  width: 80%;
+  max-width: 200px;
+}
+
+.body #cards {
+  min-height: 0px;
+}
+.body #clipboard {
+  height: 75px;
+  border: 1px solid var(--color1);
+}
+.body .mainHomeButton {
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 30px;
+}
